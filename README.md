@@ -4,7 +4,7 @@ base26 ([A-Z]) and base52 ([A-Za-z]) encodings.
 
 ## overview
 
-transform any string to an alphabetic-only string with base26 ([A-Z]) and base52 ([A-Za-z]) lossless encoding; useful for transmitting textual data over alphabetic-only or constrained channels or for training AI models and tokenizers on simpler vocabularies.
+transform any string to an alphabetic-only string with base26 ([A-Z]) and base52 ([A-Za-z]) lossless encodings; useful for transmitting textual data over alphabetic-only or constrained channels or for training AI models and tokenizers on simpler vocabularies.
 
 **alphacodings** is a fast and lightweight C++ library without third-party dependencies; bindings are available via pybind11.
 
