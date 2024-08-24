@@ -20,7 +20,7 @@ TBC
 
 ## motivation
 
-The library is inspired by R. Heaton's base26 implementation in the [pyskyWiFi](https://github.com/robert/PySkyWiFi) repository and his story on how to manipulate data transmission in constrained network channels via alphabetic-only encoding and tokenization; have a look at the original repository or blog post and show him some love!
+The library is inspired by [R. Heaton](https://github.com/robert)'s base26 implementation in the [pyskyWiFi](https://github.com/robert/PySkyWiFi) repository and his story on how to manipulate data transmission in constrained network channels via alphabetic-only encoding and tokenization; have a look at the original repository or [story blog post](https://robertheaton.com/pyskywifi) and show him some love!
 
 ## benchmarking
 
@@ -28,7 +28,9 @@ TBC
 
 ## contributing 
 
-TBC
+contributions to **alphacodings** are welcome!
+
+feel free to submit pull requests for review or open issues on our repository.
 
 ## license
 
