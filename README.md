@@ -1,6 +1,11 @@
+<div align="center">
+
 # alphacodings
 
-base26 ([A-Z]) and base52 ([A-Za-z]) encodings.
+<img src="resources/alphacodings.png" width="256" height="256">
+
+base26 ([A-Z]) and base52 ([A-Za-z]) encodings
+</div>
 
 ## overview
 
