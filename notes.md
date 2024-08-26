@@ -651,3 +651,137 @@ Given the specifics of your library and the use of `pybind11` for Python binding
 A mixed approach provides a good balance between ease of use, performance, and maintainability. It leverages the strengths of both header-only and source-only libraries while mitigating their respective downsides.
 
 Does this approach align with your goals for the library?
+
+---
+
+Got it! Let's adjust the example to meet your requirements:
+
+1. **Take a string as input and convert it to base 256 and back.**
+2. **Use scikit-build-core to build the package.**
+3. **Bundle GMP in the build/setup process to avoid manual installation and ensure cross-platform compatibility.**
+
+### Step 1: Update the C++ Code
+
+We'll modify the C++ code to handle string input and conversion to base 256.
+
+```cpp
+#include <gmp.h>
+#include <pybind11/pybind11.h>
+#include <pybind11/stl.h>
+#include <string>
+
+namespace py = pybind11;
+
+class LargeInt {
+public:
+    mpz_t value;
+
+    LargeInt() {
+        mpz_init(value);
+    }
+
+    ~LargeInt() {
+        mpz_clear(value);
+    }
+
+    void from_string(const std::string& str) {
+        mpz_import(value, str.size(), 1, sizeof(str[0]), 0, 0, str.data());
+    }
+
+    std::string to_string() const {
+        size_t count;
+        unsigned char* data = (unsigned char*)mpz_export(nullptr, &count, 1, sizeof(unsigned char), 0, 0, value);
+        std::string result(data, data + count);
+        free(data);
+        return result;
+    }
+
+    std::string to_decimal_string() const {
+        char* str = mpz_get_str(nullptr, 10, value);
+        std::string result(str);
+        free(str);
+        return result;
+    }
+};
+
+PYBIND11_MODULE(large_int, m) {
+    py::class_<LargeInt>(m, "LargeInt")
+        .def(py::init<>())
+        .def("from_string", &LargeInt::from_string)
+        .def("to_string", &LargeInt::to_string)
+        .def("to_decimal_string", &LargeInt::to_decimal_string);
+}
+```
+
+### Step 2: Create a `CMakeLists.txt` File
+
+We'll use CMake to handle the build process and include GMP as a submodule.
+
+```cmake
+cmake_minimum_required(VERSION 3.15)
+project(large_int)
+
+# Add GMP as a submodule
+include(FetchContent)
+FetchContent_Declare(
+  gmp
+  GIT_REPOSITORY https://github.com/alisw/GMP.git
+  GIT_TAG        master
+)
+FetchContent_MakeAvailable(gmp)
+
+# Find pybind11
+find_package(pybind11 REQUIRED)
+
+# Create the Python module
+pybind11_add_module(large_int large_int.cpp)
+target_link_libraries(large_int PRIVATE gmp)
+```
+
+### Step 3: Create a `setup.py` File
+
+We'll use scikit-build-core to build the package.
+
+```python
+from skbuild import setup
+
+setup(
+    name='large_int',
+    version='0.1',
+    packages=['large_int'],
+    cmake_install_dir='large_int',
+    cmake_args=[
+        '-DCMAKE_BUILD_TYPE=Release',
+    ],
+)
+```
+
+### Step 4: Build and Install the Package
+
+To build and install the package, run:
+
+```sh
+pip install .
+```
+
+### Step 5: Use the Module in Python
+
+You can now use the module in Python:
+
+```python
+import large_int
+
+# Create a LargeInt object
+li = large_int.LargeInt()
+
+# Convert a string to GMP format
+li.from_string("Hello, World!")
+
+# Convert back to string
+print(li.to_string())
+
+# Print the integer as a decimal string
+print(li.to_decimal_string())
+```
+
+This setup ensures that GMP is bundled with your package, making it easier for users to install and use your library without additional dependencies. If you have any more questions or need further adjustments, feel free to ask!
