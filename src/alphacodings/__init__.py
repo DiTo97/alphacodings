@@ -1,5 +1,4 @@
-from . import _core
-from . import _native
+from . import _core, _native
 
 
 base26_encode = _native.base26_encode
