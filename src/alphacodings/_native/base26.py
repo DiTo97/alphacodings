@@ -28,5 +28,4 @@ def base26_decode(string: str) -> str:
     for character in string:
         number = number * 26 + _decoding[character]
 
-    string = int_to_string(number)
-    return string
+    return int_to_string(number)
