@@ -1,5 +1,9 @@
 #include <pybind11/pybind11.h>
+#include <cstdint>
 #include <string>
+#include <unordered_map>
+#include <vector>
+
 
 #define stringify(x) #x
 #define macrostringify(x) stringify(x)
@@ -8,99 +12,113 @@
 namespace py = pybind11;
 
 
-std::string base26_encode(const std::string& str) {
-    unsigned int base256_int = 0;
+static const std::string _encoding_base26 = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+static const std::unordered_map<char, uint64_t> _decoding_base26 = [] {
+    std::unordered_map<char, uint64_t> _decoding;
 
-    for (char character : str) {
-        base256_int = base256_int * 256 + static_cast<unsigned int>(character);
+    for (size_t i = 0; i < _encoding_base26.size(); ++i) {
+        _decoding[_encoding_base26[i]] = i;
     }
 
-    if (base256_int == 0) {
-        return "A";  // empty input or input that equals 0
+    return _decoding;
+}();
+
+
+static const std::string _encoding_base52 = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+static const std::unordered_map<char, uint64_t> _decoding_base52 = [] {
+    std::unordered_map<char, uint64_t> _decoding;
+
+    for (size_t i = 0; i < _encoding_base52.size(); ++i) {
+        _decoding[_encoding_base52[i]] = i;
     }
 
-    std::string base26_str;
+    return _decoding;
+}();
 
-    while (base256_int > 0) {
-        base26_str = static_cast<char>((base256_int % 26) + 65) + base26_str;
-        base256_int /= 26;
+
+static uint64_t string_to_int(const std::string& string) {
+    uint64_t number = 0;
+    
+    for (char character : string) {
+        number = (number << 8) + static_cast<uint64_t>(character);
     }
-
-    return base26_str;
+    
+    return number;
 }
 
 
-std::string base26_decode(const std::string& str) {
-    unsigned int base26_int = 0;
+static std::string int_to_string(uint64_t number) {
+    std::vector<char> coding;
 
-    for (char character : str) {
-        base26_int = base26_int * 26 + (static_cast<unsigned int>(character) - 65);
+    while (number > 0) {
+        coding.push_back(static_cast<char>(number & 0xFF));
+        number = number >> 8;
     }
 
-    std::string bytestring;
-
-    while (base26_int > 0) {
-        bytestring.insert(bytestring.begin(), static_cast<char>(base26_int % 256));
-        base26_int /= 256;
-    }
-
-    return bytestring;
+    return std::string(coding.rbegin(), coding.rend());
 }
 
 
-std::string base52_encode(const std::string& str) {
-    unsigned int base256_int = 0;
+std::string base26_encode(const std::string& string) {
+    uint64_t number = string_to_int(string);
 
-    for (char character : str) {
-        base256_int = base256_int * 256 + static_cast<unsigned int>(character);
+    if (number == 0) {
+        return std::string(1, _encoding_base26[0]);  // empty string or string that equals 0
     }
 
-    if (base256_int == 0) {
-        return "a";  // empty input or input that equals 0
+    std::vector<char> coding;
+
+    while (number > 0) {
+        coding.push_back(_encoding_base26[number % 26]);
+        number = number / 26;
     }
 
-    std::string base52_str;
-
-    while (base256_int > 0) {
-        unsigned int remainder = base256_int % 52;
-
-        if (remainder < 26) {
-            base52_str = static_cast<char>(remainder + 65) + base52_str;  // uppercase
-        } else {
-            base52_str = static_cast<char>(remainder - 26 + 97) + base52_str;  // lowercase
-        }
-
-        base256_int /= 52;
-    }
-
-    return base52_str;
+    return std::string(coding.rbegin(), coding.rend());
 }
 
 
-std::string base52_decode(const std::string& str) {
-    unsigned int base52_int = 0;
+std::string base26_decode(const std::string& string) {
+    uint64_t number = 0;
 
-    for (char character : str) {
-        if ('A' <= character && character <= 'Z') {
-            base52_int = base52_int * 52 + (static_cast<unsigned int>(character) - 65);  // uppercase
-        } else {
-            base52_int = base52_int * 52 + (static_cast<unsigned int>(character) - 97 + 26);  // lowercase
-        }
+    for (char character : string) {
+        number = number * 26 + _decoding_base26.at(character);
     }
 
-    std::string bytestring;
-
-    while (base52_int > 0) {
-        bytestring.insert(bytestring.begin(), static_cast<char>(base52_int % 256));
-        base52_int /= 256;
-    }
-
-    return bytestring;
+    return int_to_string(number);
 }
 
 
-PYBIND11_MODULE(_core, M) {
-    M.doc() = R"pbdoc(
+std::string base52_encode(const std::string& string) {
+    uint64_t number = string_to_int(string);
+
+    if (number == 0) {
+        return std::string(1, _encoding_base52[0]);  // empty string or string that equals 0
+    }
+
+    std::vector<char> coding;
+
+    while (number > 0) {
+        coding.push_back(_encoding_base52[number % 52]);
+        number = number / 52;
+    }
+
+    return std::string(coding.rbegin(), coding.rend());
+}
+
+
+std::string base52_decode(const std::string& string) {
+    uint64_t number = 0;
+
+    for (char character : string) {
+        number = number * 52 + _decoding_base52.at(character);
+    }
+
+    return int_to_string(number);
+}
+
+
+PYBIND11_MODULE(_core, m) {
+    m.doc() = R"pbdoc(
         alphacodings
         -----------------------
 
@@ -117,10 +135,10 @@ PYBIND11_MODULE(_core, M) {
            base52_decode
     )pbdoc";
 
-    M.def("base26_encode", &base26_encode, "encodes a string to base26");
-    M.def("base26_decode", &base26_decode, "decodes a base26 string");
-    M.def("base52_encode", &base52_encode, "encodes a string to base52");
-    M.def("base52_decode", &base52_decode, "decodes a base52 string");
+    m.def("base26_encode", &base26_encode, "encodes a string to base26", py::arg("string"));
+    m.def("base26_decode", &base26_decode, "decodes a base26 string", py::arg("string"));
+    m.def("base52_encode", &base52_encode, "encodes a string to base52" py::arg("string"));
+    m.def("base52_decode", &base52_decode, "decodes a base52 string" py::arg("string"));
 
 #ifdef __versioninfo__
     m.attr("__version__") = macrostringify(__versioninfo__);

@@ -8,9 +8,9 @@ name = "alphacodings"
 version = "0.1.0"
 description="base26 ([A-Z]) and base52 ([A-Za-z]) encodings"
 readme = "README.md"
-authors = ["Federico Minutoli <fede97.minutoli@gmail.com>"]
-license = "MIT"
-requires-python = ">3.9"
+authors = [{name = "Federico Minutoli", email = "fede97.minutoli@gmail.com"}]
+license = {file = "LICENSE"}
+requires-python = ">3.8"
 
 [project.optional-dependencies]
 testing = ["pytest"]
@@ -42,8 +42,33 @@ environment.CFLAGS = "-fexceptions"
 environment.LDFLAGS = "-fexceptions"
 build-frontend = {name = "build", args = ["--exports", "whole_archive"]}
 
+
 [tool.ruff]
 src = ["src"]
+exclude = [
+    ".git",
+    ".git-rewrite",
+    ".ipynb_checkpoints",
+    ".mypy_cache",
+    ".nox",
+    ".pytest_cache",
+    ".pytype",
+    ".ruff_cache",
+    ".tox",
+    ".venv",
+    ".vscode",
+    "build",
+    "dist",
+    "site-packages",
+    "venv",
+]
+line-length = 88
+indent-width = 4
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+line-ending = "auto"
 
 [tool.ruff.lint]
 extend-select = [
