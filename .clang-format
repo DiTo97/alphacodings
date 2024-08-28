@@ -1,0 +1,9 @@
+---
+BasedOnStyle: LLVM
+IndentWidth: 4
+---
+Language: Cpp
+DerivePointerAlignment: false
+PointerAlignment: Left
+ColumnLimit: 88
+AlignAfterOpenBracket: BAS_BlockIndent 

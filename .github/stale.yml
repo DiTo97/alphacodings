@@ -7,8 +7,8 @@ exemptLabels:
   - security
 staleLabel: won't fix
 markComment: >
-  The issue has been automatically marked as stale because it has not had
-  recent activity; will be closed if no further activity occurs. TY for the contribution.
+  The issue has been automatically marked as stale since it has not had recent activity; 
+  will be closed if no further activity occurs. TY for the contribution.
 closeComment: false
 exemptProjects: true
 exemptMilestones: true

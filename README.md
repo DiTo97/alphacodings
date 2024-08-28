@@ -26,9 +26,9 @@ have a look at the original repository and [story blog post](https://robertheato
 
 ## benchmarking
 
-TBC
+TBC <!-- HTML string of almost 2.5M characters -->
 
-## contributing 
+## contributing
 
 contributions to **alphacodings** are welcome!
 
