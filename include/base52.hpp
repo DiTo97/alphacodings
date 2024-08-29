@@ -3,7 +3,7 @@
 
 
 #include <unordered_map>
-#include "common.h"
+#include "common.hpp"
 
 
 std::string base52_encode(const std::string& string);

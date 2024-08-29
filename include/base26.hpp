@@ -3,7 +3,7 @@
 
 
 #include <unordered_map>
-#include "common.h"
+#include "common.hpp"
 
 
 std::string base26_encode(const std::string& string);

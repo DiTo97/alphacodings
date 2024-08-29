@@ -1,4 +1,4 @@
-#include "base52.h"
+#include "base52.hpp"
 
 
 static const std::string _encoding = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
