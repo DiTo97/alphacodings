@@ -1,6 +1,6 @@
 #include <pybind11/pybind11.h>
-#include "base26.h"
-#include "base52.h"
+#include "base26.hpp"
+#include "base52.hpp"
 
 
 #define stringify(x) #x

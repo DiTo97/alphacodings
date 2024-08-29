@@ -1,4 +1,4 @@
-#include "common.h"
+#include "common.hpp"
 
 
 uint64_t string_to_base256_int(const std::string& string) {

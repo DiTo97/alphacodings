@@ -1,4 +1,4 @@
-#include "base26.h"
+#include "base26.hpp"
 
 
 static const std::string _encoding = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
