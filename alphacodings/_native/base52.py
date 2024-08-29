@@ -1,6 +1,6 @@
 from collections import deque
 
-from .common import int_to_string, string_to_int
+from .common import base256_int_to_string, string_to_base256_int
 
 
 _encoding = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
@@ -8,7 +8,7 @@ _decoding = {value: key for key, value in enumerate(_encoding)}
 
 
 def base52_encode(string: str) -> str:
-    number = string_to_int(string)
+    number = string_to_base256_int(string)
 
     if number == 0:
         return _encoding[0]  # empty string or string that equals 0
@@ -28,4 +28,4 @@ def base52_decode(string: str) -> str:
     for character in string:
         number = number * 52 + _decoding[character]
 
-    return int_to_string(number)
+    return base256_int_to_string(number)
