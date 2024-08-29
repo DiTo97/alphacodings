@@ -5,7 +5,7 @@ uint64_t string_to_base256_int(const std::string& string) {
     uint64_t number = 0;
     
     for (char character : string) {
-        number = (number << 8) + static_cast<uint64_t>(character);
+        number = (number << 8) | static_cast<uint64_t>(character);
     }
     
     return number;
