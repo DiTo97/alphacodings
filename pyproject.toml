@@ -17,6 +17,7 @@ testing = ["pytest"]
 
 
 [tool.scikit-build]
+build-command = "python buildext.py"
 wheel.expand-macos-universal-tags = true
 
 
