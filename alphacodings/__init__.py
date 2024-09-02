@@ -1,6 +1,15 @@
 from . import _core, _native
 
 
+try:
+    import gmpy2
+    
+    from . import _fastest
+    _native = _fastest
+except ImportError:
+    pass
+
+
 base26_encode = _native.base26_encode
 base26_decode = _native.base26_decode
 base52_encode = _native.base52_encode
