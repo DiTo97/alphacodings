@@ -4,7 +4,7 @@ import sys
 import nox
 
 
-nox.options.sessions = ["linting", "tests"]
+nox.options.sessions = ["linting", "tests", "tests-fastest"]
 
 
 @nox.session
@@ -18,6 +18,13 @@ def linting(session: nox.Session) -> None:
 def tests(session: nox.Session) -> None:
     """runs unit and regular tests"""
     session.install(".[testing]")
+    session.run("pytest", *session.posargs)
+
+
+@nox.session
+def tests_fastest(session: nox.Session) -> None:
+    """runs unit and regular tests"""
+    session.install(".[fastest,testing]")
     session.run("pytest", *session.posargs)
 
 
