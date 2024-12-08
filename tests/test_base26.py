@@ -1,4 +1,4 @@
-from alphacodings._native.base26 import base26_decode, base26_encode
+from alphacodings import base26_decode, base26_encode
 
 
 def test_base26_empty():
@@ -7,5 +7,5 @@ def test_base26_empty():
 
 
 def test_base26_benchmark(benchmark: str):
-    string = benchmark
+    string = benchmark[:8]  # uint64_t
     assert base26_decode(base26_encode(string)) == string

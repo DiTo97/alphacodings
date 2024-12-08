@@ -1,4 +1,4 @@
-from alphacodings._core import base52_decode, base52_encode
+from alphacodings import base52_decode, base52_encode
 
 
 def test_base52_empty():

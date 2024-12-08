@@ -11,7 +11,7 @@ base26 ([A-Z]) and base52 ([A-Za-z]) encodings
 
 transform any string to alphabetic-only with base26 ([A-Z]) and base52 ([A-Za-z]) lossless encodings; useful for transmitting textual data over restrictive channels or for training AI models and tokenizers on simpler vocabularies.
 
-**alphacodings** is a fast and lightweight C++ library; bindings are available via pybind11.
+**alphacodings** is a fast and lightweight library using [GMP arithmetic](https://gmplib.org).
 
 ## ⚙️ installation
 
@@ -54,15 +54,15 @@ if __name__ == "__main__":
 
 ## 🧠 motivation
 
-The library is inspired by [R. Heaton](https://github.com/robert)'s base26 implementation in the [pyskyWiFi](https://github.com/robert/PySkyWiFi) repository and his story on how to manipulate data transmission in restrictive network channels via alphabetic-only encodings and tokenization.
+The library is inspired by [R. Heaton](https://github.com/robert)'s base26 implementation and his story on manipulating data transmission in restrictive network channels on transatlantic flights using alphabetic-only encodings and tokenization.
 
-have a look at the original repository and [story blog post](https://robertheaton.com/pyskywifi) and show him some love!
+have a look at the original [repository](https://github.com/robert/pyskywifi) and [story blog post](https://robertheaton.com/pyskywifi) and show him some love!
 
 ## 📊 benchmarking
 
 TBC <!-- HTML string of almost 2.5M characters -->
 
-## 🤝 contributing 
+## 🤝 contributing
 
 contributions to **alphacodings** are welcome!
 
