@@ -1,32 +1,34 @@
 [build-system]
-requires = ["scikit-build-core>0.3.3", "pybind11"]
-build-backend = "scikit_build_core.build"
+requires = ["hatchling>1"]
+build-backend = "hatchling.build"
 
 
 [project]
 name = "alphacodings"
 version = "0.1.0"
-description="base26 ([A-Z]) and base52 ([A-Za-z]) encodings"
+description = "base26 ([A-Z]) and base52 ([A-Za-z]) encodings"
 readme = "README.md"
 authors = [{name = "Federico Minutoli", email = "fede97.minutoli@gmail.com"}]
 license = {file = "LICENSE"}
-requires-python = ">3.8"
-
-[project.optional-dependencies]
-testing = ["pytest"]
-fastest = ["gmpy2>1"]
+keywords = ["chunking", "encodings", "GMP", "NLP", "tokenization"]
+requires-python = ">3.9"
+dependencies = ["gmpy2>1"]
 
 
-[tool.scikit-build]
-build-command = "python buildext.py"
-wheel.expand-macos-universal-tags = true
+[dependency-groups]
+contrib = ["matplotlib>3", "memory-profiler>0", "pre-commit>4", "tqdm>4"]
+testing = ["pytest>8"]
+
+
+[tool.uv]
+default-groups = ["contrib", "testing"]
 
 
 [tool.ruff]
 src = ["src"]
 exclude = [
-    ".git",
     ".git-rewrite",
+    ".git",
     ".ipynb_checkpoints",
     ".mypy_cache",
     ".nox",
@@ -51,30 +53,30 @@ line-ending = "auto"
 
 [tool.ruff.lint]
 extend-select = [
-  "B",        # flake8-bugbear
-  "I",        # isort
-  "ARG",      # flake8-unused-arguments
-  "C4",       # flake8-comprehensions
-  "EM",       # flake8-errmsg
-  "ICN",      # flake8-import-conventions
-  "G",        # flake8-logging-format
-  "PGH",      # pygrep-hooks
-  "PIE",      # flake8-pie
-  "PL",       # pylint
-  "PT",       # flake8-pytest-style
-  "PTH",      # flake8-use-pathlib
-  "RET",      # flake8-return
-  "RUF",      # ruff-specific
-  "SIM",      # flake8-simplify
-  "T20",      # flake8-print
-  "UP",       # pyupgrade
-  "YTT",      # flake8-2020
-  "EXE",      # flake8-executable
-  "NPY",      # numpy-specific
-  "PD",       # pandas-vet
+  "ARG",
+  "B",
+  "C4",
+  "EM",
+  "EXE",
+  "G",
+  "I",
+  "ICN",
+  "NPY",
+  "PD",
+  "PGH",
+  "PIE",
+  "PL",
+  "PT",
+  "PTH",
+  "RET",
+  "RUF",
+  "SIM",
+  "T20",
+  "UP",
+  "YTT",
 ]
 ignore = [
-  "PLR09",    # too many X
+  "PLR09",
   "PLR2004",  # magic comparison
 ]
 

@@ -62,7 +62,7 @@ have a look at the original [repository](https://github.com/robert/pyskywifi) an
 
 TBC <!-- HTML string of almost 2.5M characters -->
 
-## 🤝 contributing 
+## 🤝 contributing
 
 contributions to **alphacodings** are welcome!
 
