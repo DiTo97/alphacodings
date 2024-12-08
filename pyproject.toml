@@ -22,29 +22,6 @@ build-command = "python buildext.py"
 wheel.expand-macos-universal-tags = true
 
 
-[tool.pytest.ini_options]
-minversion = "6.0"
-addopts = ["-ra", "--showlocals", "--strict-markers", "--strict-config"]
-xfail_strict = true
-log_cli_level = "INFO"
-filterwarnings = [
-  "error",
-  "ignore::pytest.PytestCacheWarning",
-]
-testpaths = ["tests"]
-
-
-[tool.cibuildwheel]
-build-frontend = "build[uv]"
-test-command = "pytest {project}/tests"
-test-extras = ["testing"]
-
-[tool.cibuildwheel.pyodide]
-environment.CFLAGS = "-fexceptions"
-environment.LDFLAGS = "-fexceptions"
-build-frontend = {name = "build", args = ["--exports", "whole_archive"]}
-
-
 [tool.ruff]
 src = ["src"]
 exclude = [
@@ -100,6 +77,10 @@ ignore = [
   "PLR09",    # too many X
   "PLR2004",  # magic comparison
 ]
+
+[tool.ruff.lint.isort]
+known-first-party = ["alphacodings"]
+lines-after-imports = 2
 
 [tool.ruff.lint.per-file-ignores]
 "tests/**" = ["T20"]
