@@ -14,9 +14,24 @@ repos:
   - id: trailing-whitespace
 
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: "v0.8.0"
+  rev: v0.8.0
   hooks:
   - id: ruff
     args: [--fix, --exit-non-zero-on-fix]
+    files: src
   - id: ruff-format
     exclude: ^(docs)
+    files: src
+
+- repo: https://github.com/astral-sh/uv-pre-commit
+  rev: 0.5.0
+  hooks:
+  - id: uv-lock
+  - id: uv-export
+
+- repo: https://github.com/pre-commit/mirrors-mypy
+  rev: v1.13.0
+  hooks:
+  - id: mypy
+    args: [--strict]
+    files: src
