@@ -54,9 +54,9 @@ if __name__ == "__main__":
 
 ## 🧠 motivation
 
-The library is inspired by [R. Heaton](https://github.com/robert)'s base26 implementation and his story on manipulating data transmission in restrictive network channels on transatlantic flights using alphabetic-only encodings and tokenization.
+The library is inspired by [R. Heaton](https://github.com/robert)'s base26 implementation and his story of manipulating data transmission in restrictive network channels on long-distance flights using alphabetic-only encodings and tokenization.
 
-have a look at the original [repository](https://github.com/robert/pyskywifi) and [story blog post](https://robertheaton.com/pyskywifi) and show him some love!
+have a look at the original [repository](https://github.com/robert/pyskywifi) and [blog post](https://robertheaton.com/pyskywifi) and show him some love!
 
 ## 📊 benchmarking
 
