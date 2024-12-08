@@ -54,7 +54,7 @@ if __name__ == "__main__":
 
 ## 🧠 motivation
 
-The library is inspired by [R. Heaton](https://github.com/robert)'s base26 implementation and his story on how to manipulate data transmission in restrictive network channels via alphabetic-only encodings and tokenization.
+The library is inspired by [R. Heaton](https://github.com/robert)'s base26 implementation and his story on manipulating data transmission in restrictive network channels on transatlantic flights using alphabetic-only encodings and tokenization.
 
 have a look at the original [repository](https://github.com/robert/pyskywifi) and [story blog post](https://robertheaton.com/pyskywifi) and show him some love!
 
@@ -67,14 +67,6 @@ TBC <!-- HTML string of almost 2.5M characters -->
 contributions to **alphacodings** are welcome!
 
 feel free to submit pull requests or open issues on our repository.
-
-```shell
-uv run pytest tests
-```
-
-```shell
-uv run pre-commit run --all-files
-```
 
 ## 📄 license
 
