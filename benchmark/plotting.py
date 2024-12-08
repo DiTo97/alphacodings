@@ -14,7 +14,7 @@ def plot_measure_efficiency(N: list[int], efficiency: dict[str, Tracker]):
     plt.figure(figsize=(12, 6))
 
     plt.subplot(1, 2, 1)
-    
+
     for config in efficiency:
         plt.plot(N, efficiency[config]["elapsed"], label=config)
 
@@ -26,7 +26,7 @@ def plot_measure_efficiency(N: list[int], efficiency: dict[str, Tracker]):
     plt.title("elapsed efficiency")
 
     plt.subplot(1, 2, 2)
-    
+
     for config in efficiency:
         plt.plot(N, efficiency[config]["space"], label=config)
 

@@ -1,7 +1,8 @@
 from collections import deque
 
 import gmpy2
-from .common import base256_int_to_string, string_to_base256_int
+
+from alphacodings.common import base256_int_to_string, string_to_base256_int
 
 
 _encoding = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
@@ -20,7 +21,7 @@ def base52_encode(string: str) -> str:
     while number > 0:
         number, modulo = divmod(number, 52)
         coding.appendleft(_encoding[int(modulo)])
-    
+
     return "".join(coding)
 
 
@@ -31,4 +32,4 @@ def base52_decode(string: str) -> str:
     for character in string:
         number = number * 52 + _decoding[character]
 
-    return base256_int_to_string(number)  
+    return base256_int_to_string(number)

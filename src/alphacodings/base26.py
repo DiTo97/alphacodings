@@ -1,7 +1,8 @@
 from collections import deque
 
 import gmpy2
-from .common import base256_int_to_string, string_to_base256_int
+
+from alphacodings.common import base256_int_to_string, string_to_base256_int
 
 
 _encoding = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
@@ -20,7 +21,7 @@ def base26_encode(string: str) -> str:
     while number > 0:
         number, modulo = divmod(number, 26)
         coding.appendleft(_encoding[int(modulo)])
-    
+
     return "".join(coding)
 
 

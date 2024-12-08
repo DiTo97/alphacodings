@@ -68,6 +68,14 @@ contributions to **alphacodings** are welcome!
 
 feel free to submit pull requests or open issues on our repository.
 
+```shell
+uv run pytest tests
+```
+
+```shell
+uv run pre-commit run --all-files
+```
+
 ## 📄 license
 
 see the [LICENSE](LICENSE) file for more details.
