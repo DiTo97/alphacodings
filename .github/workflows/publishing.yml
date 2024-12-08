@@ -1,0 +1,42 @@
+name: publishing to PI
+
+on:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  build:
+    name: build
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - uses: astral-sh/setup-uv@v4
+      with:
+        version: ">0.5.0"
+        enable-cache: true
+        cache-dependency-glob: "uv.lock"
+    - run: uv build
+    - uses: actions/upload-artifact@v4
+      with:
+        name: alphacodings
+        path: dist/
+
+  publishing:
+    name: publishing
+    needs:
+    - build
+    runs-on: ubuntu-latest
+    environment:
+      name: publishing
+      url: https://pypi.org/p/alphacodings
+    permissions:
+      id-token: write
+
+    steps:
+    - uses: actions/download-artifact@v4
+      with:
+        name: alphacodings
+        path: dist/
+    - run: uv publish
