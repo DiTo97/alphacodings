@@ -42,11 +42,11 @@ string = """\
 if __name__ == "__main__":
     encoding_base26 = base26_encode(string)
     print(encoding_base26)
-    # >>> YBPNLKVNQWZQCMDHMLNDTVQCCRKQLNCFGMQPNGQCIXHUUPHFUNKUFEPDLKIGARFOKTDEZKQHXGCPYHDZKKVIUDNFOAYYAUOQFBJFFGSTKAXNWGDPVUJNBARPNXBASHZBXIBSSEFTAIQRPEADSOVVNXUMQXVDWTAIVCIVWQZAHAGYAVZYKGMETJOOUQNOEXMSOOGSKVMFBYZIBZDAITICYVXMJTTCCHPMSCABLYUMFDUNLVSLNKHSBPKCGASXJSFYDHZFAOEQTUACEBIFKQGYC
+    # >>> ["YBPNLKVNQWZQCMDHMLNDTVQCCRKQLNCFGMQPNGQCIXHUUPHFUNKUFEPDLKIGARFOKTDEZKQHXGCPYHDZKKVIUDNFOAYYAUOQFBJFFGSTKAXNWGDPVUJNBARPNXBASHZBXIBSSEFTAIQRPEADSOVVNXUMQXVDWTAIVCIVWQZAHAGYAVZYKGMETJOOUQNOEXMSOOGSKVMFBYZIBZDAITICYVXMJTTCCHPMSCABLYUMFDUNLVSLNKHSBPKCGASXJSFYDHZFAOEQTUACEBIFKQGYC"]
 
     encoding_base52 = base52_encode(string)
     print(encoding_base52)
-    # >>> EgcgYRPxckylMQWRLDADNZxPJiJcHaVwYHLnicahBgaotGGANZuvsvcpSSOJFLXvKPjRlNQCJqqdviiIdtnwJyDOnWojsrpkWSTZFHbMIREvREjpsODtSxoLlLjQZOoehsGFzawGQecyuomgpZQNyFnZQLWPiDhzClwxBFCCwdqduGJoshrwFdwHWMtJpSTmjxzaYmNvzOIOwLkJvyQHCaFtrODPhbhBpPBmC
+    # >>> ["EgcgYRPxckylMQWRLDADNZxPJiJcHaVwYHLnicahBgaotGGANZuvsvcpSSOJFLXvKPjRlNQCJqqdviiIdtnwJyDOnWojsrpkWSTZFHbMIREvREjpsODtSxoLlLjQZOoehsGFzawGQecyuomgpZQNyFnZQLWPiDhzClwxBFCCwdqduGJoshrwFdwHWMtJpSTmjxzaYmNvzOIOwLkJvyQHCaFtrODPhbhBpPBmC"]
 
     assert base26_decode(encoding_base26) == string
     assert base52_decode(encoding_base52) == string
@@ -56,11 +56,17 @@ if __name__ == "__main__":
 
 The library is inspired by [R. Heaton](https://github.com/robert)'s base26 implementation and his story of manipulating data transmission in restrictive network channels on long-distance flights using alphabetic-only encodings and tokenization.
 
-have a look at the original [repository](https://github.com/robert/pyskywifi) and [blog post](https://robertheaton.com/pyskywifi) and show him some love!
+have a look at the original [repository](https://github.com/robert/pyskywifi) and story [blog post](https://robertheaton.com/pyskywifi) and show him some love.
 
 ## 📊 benchmarking
 
-TBC <!-- HTML string of almost 2.5M characters -->
+our implementation is orders of magnitude more efficient on 100k+ strings:
+
+<div align="center">
+<img src="resources/benchmark.png" alt="benchmarking">
+
+*Figure 1: runtime and memory usage performance against Heaton's original implementation with and without automatic chunking and SIMD on variable-length strings with a strict 60-second timeout; average over 5 trials.*
+</div>
 
 ## 🤝 contributing
 

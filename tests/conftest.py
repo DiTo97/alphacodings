@@ -14,4 +14,4 @@ def benchmark() -> str:
     with benchmark.open("rt", encoding="utf-8") as f:
         string = f.read()
 
-    return string[:1_000_000]
+    return string

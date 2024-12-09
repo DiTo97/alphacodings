@@ -7,5 +7,5 @@ def test_base26_empty():
 
 
 def test_base26_benchmark(benchmark: str):
-    string = benchmark[:8]  # uint64_t
+    string = benchmark
     assert base26_decode(base26_encode(string)) == string

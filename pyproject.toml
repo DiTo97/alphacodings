@@ -5,7 +5,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "alphacodings"
-version = "0.1.0"
+version = "0.2.0"
 description = "base26 ([A-Z]) and base52 ([A-Za-z]) encodings"
 readme = "README.md"
 authors = [{name = "Federico Minutoli", email = "fede97.minutoli@gmail.com"}]
@@ -16,16 +16,15 @@ dependencies = ["gmpy2>1"]
 
 
 [dependency-groups]
-contrib = ["matplotlib>3", "memory-profiler>0", "pre-commit>4", "tqdm>4"]
-testing = ["pytest>8"]
+contrib = ["pre-commit>4", "pytest>8"]
 
 
 [tool.uv]
-default-groups = ["contrib", "testing"]
+default-groups = ["contrib"]
 
 
 [tool.ruff]
-src = ["src"]
+src = ["src", "tests"]
 exclude = [
     ".git-rewrite",
     ".git",
@@ -76,8 +75,10 @@ extend-select = [
   "YTT",
 ]
 ignore = [
+  "E741",
   "PLR09",
   "PLR2004",  # magic comparison
+  "RET504",
 ]
 
 [tool.ruff.lint.isort]
