@@ -64,7 +64,7 @@ our implementation is orders of magnitude more efficient on 100k+ strings:
 
 <img src="resources/benchmark.png" alt="Benchmark results">
 
-*Figure 1: runtime and memory usage performance against Heaton's original implementation w/ and w/o chunking on varying lengths strings on a 60-second timeout.*
+*Figure 1: runtime and memory usage performance against Heaton's original implementation with and without automatic chunking and SIMD on varying-length strings at a strict 60-second timeout.*
 
 with and without automatic chunking and SIMD.
 
