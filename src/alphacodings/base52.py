@@ -2,14 +2,21 @@ from collections import deque
 
 import gmpy2
 
-from alphacodings.common import base256_int_to_string, string_to_base256_int
+from alphacodings.common import (
+    SIMD,
+    Encoding,
+    base256_int_to_string,
+    chunking,
+    max_string_len,
+    string_to_base256_int,
+)
 
 
 _encoding = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
 _decoding = {value: key for key, value in enumerate(_encoding)}
 
 
-def base52_encode(string: str) -> str:
+def _base52_single_encode(string: str) -> str:
     """encodes a string to base52"""
     number = string_to_base256_int(string)
 
@@ -25,7 +32,7 @@ def base52_encode(string: str) -> str:
     return "".join(coding)
 
 
-def base52_decode(string: str) -> str:
+def _base52_single_decode(string: str) -> str:
     """decodes a base52 string"""
     number = gmpy2.mpz(0)
 
@@ -33,3 +40,27 @@ def base52_decode(string: str) -> str:
         number = number * 52 + _decoding[character]
 
     return base256_int_to_string(number)
+
+
+_SIMD_base52_single_encode = SIMD(_base52_single_encode)
+_SIMD_base52_single_decode = SIMD(_base52_single_decode)
+
+
+def base52_encode(string: str) -> Encoding:
+    """encodes a string to base52 with chunking"""
+    if len(string) < max_string_len + 1:
+        return [_base52_single_encode(string)]
+
+    output = _SIMD_base52_single_encode(chunking(string))
+    return output
+
+
+def base52_decode(encoding: Encoding) -> str:
+    """decodes a base52 encoding"""
+    if len(encoding) == 1:
+        return _base52_single_decode(encoding[0])
+
+    output = _SIMD_base52_single_decode(encoding)
+    output = "".join(output)
+
+    return output

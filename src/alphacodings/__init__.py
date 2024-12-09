@@ -14,6 +14,13 @@ base26 ([A-Z]) and base52 ([A-Za-z]) encodings.
 
 from alphacodings.base26 import base26_decode, base26_encode
 from alphacodings.base52 import base52_decode, base52_encode
+from alphacodings.common import Encoding
 
 
-__all__ = ["base26_decode", "base26_encode", "base52_decode", "base52_encode"]
+__all__ = [
+    "Encoding",
+    "base26_decode",
+    "base26_encode",
+    "base52_decode",
+    "base52_encode",
+]
