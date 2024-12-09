@@ -56,13 +56,15 @@ if __name__ == "__main__":
 
 The library is inspired by [R. Heaton](https://github.com/robert)'s base26 implementation and his story of manipulating data transmission in restrictive network channels on long-distance flights using alphabetic-only encodings and tokenization.
 
-have a look at the original [repository](https://github.com/robert/pyskywifi) and story [blog post](https://robertheaton.com/pyskywifi) and show him some love!
+have a look at the original [repository](https://github.com/robert/pyskywifi) and story [blog post](https://robertheaton.com/pyskywifi) and show him some love.
 
 ## 📊 benchmarking
 
 our implementation is orders of magnitude more efficient on 100k+ strings:
 
-<img src="resources/benchmark.png">
+<img src="resources/benchmark.png" alt="Benchmark results">
+
+*Figure 1: runtime and memory usage performance against Heaton's original implementation w/ and w/o chunking on varying lengths strings on a 60-second timeout.*
 
 with and without automatic chunking and SIMD.
 
