@@ -16,7 +16,7 @@ _encoding = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
 _decoding = {value: key for key, value in enumerate(_encoding)}
 
 
-def _base52_single_encode(string: str) -> str:
+def _base52_encode(string: str) -> str:
     """encodes a string to base52"""
     number = string_to_base256_int(string)
 
@@ -32,7 +32,7 @@ def _base52_single_encode(string: str) -> str:
     return "".join(coding)
 
 
-def _base52_single_decode(string: str) -> str:
+def _base52_decode(string: str) -> str:
     """decodes a base52 string"""
     number = gmpy2.mpz(0)
 
@@ -42,25 +42,25 @@ def _base52_single_decode(string: str) -> str:
     return base256_int_to_string(number)
 
 
-_SIMD_base52_single_encode = SIMD(_base52_single_encode)
-_SIMD_base52_single_decode = SIMD(_base52_single_decode)
+_SIMD_base52_encode = SIMD(_base52_encode)
+_SIMD_base52_decode = SIMD(_base52_decode)
 
 
 def base52_encode(string: str) -> Encoding:
     """encodes a string to base52 with chunking"""
-    if len(string) < max_string_len + 1:
-        return [_base52_single_encode(string)]
+    if len(string) < max_string_len:
+        return [_base52_encode(string)]
 
-    output = _SIMD_base52_single_encode(chunking(string))
+    output = _SIMD_base52_encode(chunking(string))
     return output
 
 
 def base52_decode(encoding: Encoding) -> str:
     """decodes a base52 encoding"""
     if len(encoding) == 1:
-        return _base52_single_decode(encoding[0])
+        return _base52_decode(encoding[0])
 
-    output = _SIMD_base52_single_decode(encoding)
+    output = _SIMD_base52_decode(encoding)
     output = "".join(output)
 
     return output

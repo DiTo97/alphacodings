@@ -16,12 +16,11 @@ dependencies = ["gmpy2>1"]
 
 
 [dependency-groups]
-contrib = ["matplotlib>3", "memory-profiler>0", "pre-commit>4", "tqdm>4", "multiprocess>0"]
-testing = ["pytest>8"]
+contrib = ["pre-commit>4", "pytest>8"]
 
 
 [tool.uv]
-default-groups = ["contrib", "testing"]
+default-groups = ["contrib"]
 
 
 [tool.ruff]
