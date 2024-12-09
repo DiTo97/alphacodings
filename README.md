@@ -62,9 +62,11 @@ have a look at the original [repository](https://github.com/robert/pyskywifi) an
 
 our implementation is orders of magnitude more efficient on 100k+ strings:
 
-<img src="resources/benchmark.png" alt="Benchmark results">
+<div align="center">
+<img src="resources/benchmark.png" alt="benchmarking">
 
 *Figure 1: runtime and memory usage performance against Heaton's original implementation with and without automatic chunking and SIMD on variable-length strings with a strict 60-second timeout; average over 5 trials.*
+</div>
 
 ## 🤝 contributing
 
