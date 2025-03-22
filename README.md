@@ -1,6 +1,6 @@
 <div align="center">
 
-# alphacodings
+# Alphacodings
 
 <img src="resources/alphacodings.png" width="256" height="256">
 
@@ -11,7 +11,7 @@ base26 ([A-Z]) and base52 ([A-Za-z]) encodings
 
 transform any string to alphabetic-only with base26 ([A-Z]) and base52 ([A-Za-z]) lossless encodings; useful for transmitting textual data over restrictive channels or for training AI models and tokenizers on simpler vocabularies.
 
-**alphacodings** is a fast and lightweight library using [GMP arithmetic](https://gmplib.org).
+**Alphacodings** is a fast and lightweight library using [GMP arithmetic](https://gmplib.org).
 
 ## ⚙️ installation
 
@@ -68,7 +68,7 @@ our implementation is orders of magnitude more efficient on 100k+ strings:
 
 ## 🤝 contributing
 
-contributions to **alphacodings** are welcome!
+contributions to **Alphacodings** are welcome!
 
 feel free to submit pull requests or open issues on our repository.
 
